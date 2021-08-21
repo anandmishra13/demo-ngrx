@@ -1,0 +1,53 @@
+<div class="container d-table sign-in">
+  <div class="row d-table-cell align-middle">
+    <div class="col">
+      <section class="row mt-5">
+        <form class="text-center" #signin="ngForm" (ngSubmit)="signIn(signin)">
+          <mat-form-field class="col-12">
+            <input
+              type="email"
+              matInput
+              placeholder="Email"
+              ngModel
+              name="email"
+              email
+              autocomplete="false"
+              #email="ngModel"
+              required>
+              <mat-error *ngIf="email.hasError('required')">Field should be not empty</mat-error>
+              <mat-error *ngIf="!email.hasError('required')">Email is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-12 mt-3">
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              ngModel
+              required
+              minlength="6"
+              #pwd="ngModel"
+              name="password">
+              <mat-hint>Should be at least 6 characters long</mat-hint>
+              <mat-error>Should be at least 6 characters long</mat-error>
+              <mat-hint align="end">{{pwd.value?.length}} / 6</mat-hint>
+          </mat-form-field>
+          <mat-checkbox
+            class="mt-2 col-12 text-start"
+            ngModel
+            color="primary"
+            name="termsAndCondition">
+            Remember Me.
+          </mat-checkbox>
+          <button
+            class="mt-3 text-center"
+            color="primary"
+            mat-raised-button
+            [disabled]="!signin.valid"
+            type="submit">
+            Sign In
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
