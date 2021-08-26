@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <button class="d-lg-none d-block" (click)="onToggleSideNav()" mat-icon-button><mat-icon>menu</mat-icon></button>
+  <div><a routerLink="/">LOGO</a></div>
+  <div class="sidenav-navigation d-none d-lg-flex">
+    <a routerLink="/signup">SignUp</a>
+    <a routerLink="/login" class="mx-3">Login</a>
+    <a routerLink="/training">Training</a>
+    <a class="ms-3">Logout</a>
+  </div>
+</mat-toolbar>

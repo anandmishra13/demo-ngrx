@@ -1,37 +1,9 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
-    <mat-nav-list>
-        <a mat-list-item routerLink="/signup" (click)="sidenav.toggle()">
-          <mat-icon>face</mat-icon>
-          <span class="ms-2">SignUp</span>
-        </a>
-        <a mat-list-item routerLink="/login" (click)="sidenav.toggle()">
-          <mat-icon>input</mat-icon>
-          <span class="ms-2">SignIn</span>
-        </a>
-        <a mat-list-item routerLink="/training" (click)="sidenav.toggle()">
-          <mat-icon>model_training</mat-icon>
-          <span class="ms-2">Training</span>
-        </a>
-    </mat-nav-list>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/" (click)="sidenav.toggle()">
-        <mat-icon>eject</mat-icon>
-        <span class="ms-2">Logout</span>
-      </a>
-    </mat-nav-list>
+    <app-sidenav-list (toggleSideNav)="sidenav.toggle()"></app-sidenav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button class="d-lg-none d-block" (click)="sidenav.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button>
-      <div><a routerLink="/">LOGO</a></div>
-      <div class="sidenav-navigation d-none d-lg-flex">
-        <a routerLink="/signup">SignUp</a>
-        <a routerLink="/login" class="mx-3">Login</a>
-        <a routerLink="/training">Training</a>
-        <a class="ms-3">Logout</a>
-      </div>
-    </mat-toolbar>
+    <app-header (sideNavToggle)="sidenav.toggle()"></app-header>
     <main>
       <router-outlet></router-outlet>
     </main>

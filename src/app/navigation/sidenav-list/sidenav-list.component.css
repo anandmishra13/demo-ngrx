@@ -1,9 +1,7 @@
 
-mat-sidenav {
-  width: 50%;
-}
 .sidenav-navigation {
   display: flex;
   width: 100%;
   justify-content: flex-end;
 }
+
