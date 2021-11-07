@@ -18,6 +18,10 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { StopTrainingComponent } from './training/current-training/stop-training.component';
 import { AuthService } from './auth/service/auth.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +43,10 @@ import { AuthService } from './auth/service/auth.service';
     MaterialModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.config),
+    AngularFirestoreModule
+
   ],
   providers: [AuthService, TrainingService],
   bootstrap: [AppComponent],
