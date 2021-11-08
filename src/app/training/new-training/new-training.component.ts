@@ -21,17 +21,20 @@ export class NewTrainingComponent implements OnInit {
 
   ngOnInit(): void {
     this.exercise = this.db.collection('availableExercises')
-    .snapshotChanges()
-    .forEach(docArray => {
-      return docArray.map((doc: any) => {
-        return {
-          id: doc.payload.doc.id,
-          name: doc.payload.doc.data().name,
-          calories: doc.payload.doc.data().calories,
-          duration: doc.payload.doc.data().duration,
+      .snapshotChanges()
+      .pipe(
+        map((docArray: any) => {
+          return docArray.map((doc: any) => {
+            return {
+              id: doc.payload.doc.id,
+              name: doc.payload.doc.data().name,
+              duration: doc.payload.doc.data().duration,
+              calories: doc.payload.doc.data().calories
+            };
+          });
         }
-      });
-    })
+        )
+      )
   }
   onStartTrainig(form: NgForm): void {
     this.service.startRunningExercise(form.value.exercise);
