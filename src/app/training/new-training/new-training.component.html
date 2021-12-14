@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row mx-auto ">
     <div>
-      <form #newTraining="ngForm" (ngSubmit)="onStartTrainig(newTraining)">
+      <form #newTraining="ngForm" (ngSubmit)="onStartTraining(newTraining)">
         <mat-card class="col-10 col-md-6 mx-auto mt-4 text-center">
           <mat-card-title>
             Time to start workout!
@@ -10,7 +10,7 @@
             <mat-form-field appearance="fill">
               <mat-label>Favorite food</mat-label>
               <mat-select ngModel name="exercise" required>
-                <mat-option *ngFor="let exercises of exercise | async" [value]="exercises.name">
+                <mat-option *ngFor="let exercises of exercises" [value]="exercises.name">
                   {{exercises.name}}
                 </mat-option>
               </mat-select>

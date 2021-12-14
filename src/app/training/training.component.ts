@@ -9,21 +9,21 @@ import { Subscription } from 'rxjs';
 })
 export class TrainingComponent implements OnInit {
 
-  public onGoiningTraining = false;
-  private exerciseSubscription: Subscription;
+  ongoingTraining = false;
+  exerciseSubscription: Subscription;
 
-  constructor(
-    private service: TrainingService
-  ) { }
+  constructor(private trainingService: TrainingService) {}
 
-  ngOnInit(): void {
-    this.exerciseSubscription = this.service.exersieChange.subscribe(exersie => {
-      if (exersie) {
-        this.onGoiningTraining = true;
-      } else {
-        this.onGoiningTraining = false;
+  ngOnInit() {
+    this.exerciseSubscription = this.trainingService.exerciseChanged.subscribe(
+      exercise => {
+        if (exercise) {
+          this.ongoingTraining = true;
+        } else {
+          this.ongoingTraining = false;
+        }
       }
-    })
+    );
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="training-container">
-  <mat-tab-group mat-align-tabs="center" *ngIf="!onGoiningTraining">
+  <mat-tab-group mat-align-tabs="center" *ngIf="!ongoingTraining">
     <mat-tab label="New Exercise">
       <app-new-training></app-new-training>
     </mat-tab>
@@ -7,6 +7,6 @@
       <app-past-training></app-past-training>
     </mat-tab>
   </mat-tab-group>
-  <app-current-training *ngIf="onGoiningTraining" (trainingExit)="onGoiningTraining = false"></app-current-training>
+  <app-current-training *ngIf="ongoingTraining" (trainingExit)="ongoingTraining = false"></app-current-training>
 
 </div>

@@ -10,41 +10,43 @@ import { StopTrainingComponent } from './stop-training.component';
 })
 export class CurrentTrainingComponent implements OnInit {
 
-  public progres: number = 0;
+  public progress: number = 0;
   private timer: any | undefined;
 
   @Output() trainingExit = new EventEmitter<void>();
   constructor(
     private dialog: MatDialog,
-    private service: TrainingService
+    private trainingService: TrainingService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.startOrResumeTimer();
   }
-  startOrResumeTimer(): void {
+
+  startOrResumeTimer() {
     this.timer = setInterval(() => {
-      this.progres = this.progres + 1;
-      if (this.progres >= 100) {
-        this.service.completeExercise();
+      this.progress = this.progress + 1;
+      if (this.progress >= 100) {
+        this.trainingService.completeExercise();
         clearInterval(this.timer);
       }
     }, 1000);
   }
-  onStop(): void {
+
+  onStop() {
     clearInterval(this.timer);
     const dialogRef = this.dialog.open(StopTrainingComponent, {
       data: {
-        progress: this.progres
+        progress: this.progress
       }
     });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.service.cancelExercise(this.progres);
+        this.trainingService.cancelExercise(this.progress);
       } else {
         this.startOrResumeTimer();
       }
-    })
+    });
   }
 }
