@@ -6,7 +6,7 @@
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
     <td mat-cell *matCellDef="let element">
-      {{element?.date.getDate() + '-' + (element?.date.getMonth() + 1) + '-' + element?.date.getFullYear() }}
+      {{moment(element.date).format("MMM Do YY")}}
     </td>
   </ng-container>
 

@@ -13,7 +13,6 @@ export class CurrentTrainingComponent implements OnInit {
   public progress: number = 0;
   private timer: any | undefined;
 
-  @Output() trainingExit = new EventEmitter<void>();
   constructor(
     private dialog: MatDialog,
     private trainingService: TrainingService

@@ -10,7 +10,7 @@
             <mat-form-field appearance="fill">
               <mat-label>Favorite food</mat-label>
               <mat-select ngModel name="exercise" required>
-                <mat-option *ngFor="let exercises of exercises" [value]="exercises.name">
+                <mat-option *ngFor="let exercises of exercises" [value]="exercises.id">
                   {{exercises.name}}
                 </mat-option>
               </mat-select>

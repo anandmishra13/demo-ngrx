@@ -21,6 +21,8 @@ import { AuthService } from './auth/service/auth.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AuthGuard } from './auth/service/auth.guard';
 
 
 @NgModule({
@@ -45,10 +47,11 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.config),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
 
   ],
-  providers: [AuthService, TrainingService],
+  providers: [AuthService, TrainingService, AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent]
 })

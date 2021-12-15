@@ -4,6 +4,7 @@ import { SigupComponent } from './auth/sigup/sigup.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from './auth/service/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'training',
-    component: TrainingComponent
+    component: TrainingComponent,
+    canActivate: [AuthGuard]
   }
 ]
 
