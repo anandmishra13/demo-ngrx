@@ -39,13 +39,15 @@
             Remember Me.
           </mat-checkbox>
           <button
+            *ngIf="!isLoading"
             class="mt-3 text-center"
             color="primary"
             mat-raised-button
             [disabled]="!signin.valid"
             type="submit">
-            Sign In
+            <span>Sign In</span>
           </button>
+          <mat-spinner class="text-center mx-auto" [diameter]="50" *ngIf="isLoading"></mat-spinner>
         </form>
       </section>
     </div>

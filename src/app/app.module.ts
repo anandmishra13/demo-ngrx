@@ -23,6 +23,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthGuard } from './auth/service/auth.guard';
+import { UIservice } from './shared/ui.service';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { AuthGuard } from './auth/service/auth.guard';
     AngularFireAuthModule
 
   ],
-  providers: [AuthService, TrainingService, AuthGuard],
+  providers: [AuthService, TrainingService, AuthGuard, UIservice],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent]
 })

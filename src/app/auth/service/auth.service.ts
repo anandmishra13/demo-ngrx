@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { UIservice } from "src/app/shared/ui.service";
 import { TrainingService } from "src/app/training/service/training.service";
 import { AuthData } from "../interface/auto-data.model";
 import { User } from "../interface/user.model";
@@ -15,7 +17,9 @@ export class AuthService {
   constructor(
     private router: Router,
     private auth: AngularFireAuth,
-    private service: TrainingService
+    private service: TrainingService,
+    private snackbar: MatSnackBar,
+    private UIservice: UIservice
   ) { }
 
   initAuthListner() {
@@ -33,25 +37,37 @@ export class AuthService {
     });
   }
   registerUser(authData: AuthData): void {
+    this.UIservice.loadingStateChange.next(true);
     this.auth.createUserWithEmailAndPassword(
       authData.email,
       authData.password
     ).then(res => {
-      console.log(res)
+      this.UIservice.loadingStateChange.next(false);
     })
     .catch(err => {
-      console.log(err)
+      this.UIservice.loadingStateChange.next(false);
+      this.UIservice.showSnackbar(
+        'The email address is already in use by another account',
+        'close',
+        4000
+      );
     });
   }
   loginData(authData: AuthData): void {
+    this.UIservice.loadingStateChange.next(true);
     this.auth.signInWithEmailAndPassword(
       authData.email,
       authData.password
     ).then(res => {
-      console.log(res);
+      this.UIservice.loadingStateChange.next(false);
     })
     .catch(err => {
-        console.log(err)
+      this.UIservice.loadingStateChange.next(false);
+      this.UIservice.showSnackbar(
+        'The password is invalid or the user does not have a password',
+        'close',
+        4000
+      )
     })
   }
 
