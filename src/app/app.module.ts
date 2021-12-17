@@ -1,3 +1,4 @@
+import { AuthModule } from './auth/auth.module';
 import { TrainingService } from './training/service/training.service';
 import { AppRoutingModule } from './app-router.module';
 import { NgModule } from '@angular/core';
@@ -5,15 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
-import { SigupComponent } from './auth/sigup/sigup.component';
-import { LoginComponent } from './auth/login/login.component';
-import { TrainingComponent } from './training/training.component';
-import { CurrentTrainingComponent } from './training/current-training/current-training.component';
-import { NewTrainingComponent } from './training/new-training/new-training.component';
-import { PastTrainingComponent } from './training/past-training/past-training.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { StopTrainingComponent } from './training/current-training/stop-training.component';
@@ -21,20 +14,13 @@ import { AuthService } from './auth/service/auth.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { environment } from 'src/environments/environment';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AuthGuard } from './auth/service/auth.guard';
 import { UIservice } from './shared/ui.service';
+import { ShareModule } from './shared/share.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigupComponent,
-    LoginComponent,
-    TrainingComponent,
-    CurrentTrainingComponent,
-    NewTrainingComponent,
-    PastTrainingComponent,
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
@@ -42,17 +28,14 @@ import { UIservice } from './shared/ui.service';
   ],
   imports: [
     BrowserModule,
+    ShareModule,
     BrowserAnimationsModule,
-    MaterialModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.config),
     AngularFirestoreModule,
-    AngularFireAuthModule
-
+    AuthModule,
   ],
-  providers: [AuthService, TrainingService, AuthGuard, UIservice],
+  providers: [AuthService, TrainingService, UIservice],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent]
 })

@@ -4,6 +4,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { UIservice } from 'src/app/shared/ui.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,11 @@ export class TrainingService {
   private fbSubscription: Subscription[] = [];
 
   constructor(
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private UIService: UIservice
   ) { }
   fetchAvailableExercises() {
+    this.UIService.loadingStateChange.next(true);
     this.fbSubscription.push(
       this.db
       .collection('availableExercises')
@@ -38,8 +41,12 @@ export class TrainingService {
         })
       )
       .subscribe((exercises: Exercise[]) => {
-        this.availableExercises = exercises;
+      this.UIService.loadingStateChange.next(false);
+      this.availableExercises = exercises;
         this.exercisesChanged.next([...this.availableExercises]);
+      }, error => {
+        this.UIService.loadingStateChange.next(false);
+        this.UIService.showSnackbar('Something went wrong', 'close', 4000);
       })
     );
   }

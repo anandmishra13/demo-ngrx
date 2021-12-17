@@ -1,6 +1,4 @@
 import { TrainingComponent } from './training/training.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SigupComponent } from './auth/sigup/sigup.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
@@ -12,22 +10,16 @@ const routes: Routes = [
     component: WelcomeComponent
   },
   {
-    path: 'signup',
-    component: SigupComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
     path: 'training',
-    component: TrainingComponent,
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./training/training.module').then(m => m.TrainingModule),
+    canLoad: [AuthGuard]
   }
 ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard],
+
 })
 export class AppRoutingModule {}
